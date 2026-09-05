@@ -1,0 +1,78 @@
+{
+    "version": 1,
+    "name": "Input",
+    "maps": [
+        {
+            "name": "PlayerInput",
+            "id": "a94225fe-477f-4910-aff6-c6dafa67757c",
+            "actions": [
+                {
+                    "name": "TouchDelta",
+                    "type": "Value",
+                    "id": "9ec860ac-2154-405d-a039-0449e4f49c32",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true,
+                    "priority": 0
+                },
+                {
+                    "name": "TouchPress",
+                    "type": "Button",
+                    "id": "2816a2a6-6d5a-4661-8d66-d4cc355855cd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "TouchPosition",
+                    "type": "Value",
+                    "id": "fededc11-2561-485c-8c9a-f7796b5709e2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3d2a3c1d-2255-4804-994e-5c3c0c3f0e31",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8eb82fca-6cee-4aa6-86a3-c58b29255af7",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c52c19ab-5369-4661-ae88-50fa692ff1bb",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
