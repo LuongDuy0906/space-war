@@ -3,15 +3,18 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    // Bắn ra khoảng cách ngón tay vừa vuốt
     public static event Action<Vector2> OnDragDelta;
 
     private global::Input inputAction;
-    private bool wasPressedLastFrame = false;
-    private Vector2 lastPosition;
+    private bool isDragging = false;
 
     private void Awake()
     {
         inputAction = new global::Input();
+
+        inputAction.PlayerInput.TouchPress.started += _ => isDragging = true;
+        inputAction.PlayerInput.TouchPress.canceled += _ => isDragging = false;
     }
 
     private void OnEnable() => inputAction.PlayerInput.Enable();
@@ -19,34 +22,15 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        // Kiểm tra xem phím/cảm ứng có đang được giữ hay không
-        bool isPressed = inputAction.PlayerInput.TouchPress.IsPressed();
-
-        if (isPressed)
+        if (isDragging)
         {
-            Vector2 currentPosition = inputAction.PlayerInput.TouchPosition.ReadValue<Vector2>();
+            Vector2 delta = inputAction.PlayerInput.TouchDelta.ReadValue<Vector2>();
 
-            // Frame đầu tiên vừa chạm xuống: chỉ ghi nhận vị trí gốc, không tính delta
-            if (!wasPressedLastFrame)
-            {
-                lastPosition = currentPosition;
-                wasPressedLastFrame = true;
-                return;
-            }
-
-            // Các frame tiếp theo: tính khoảng dời
-            Vector2 delta = currentPosition - lastPosition;
-            lastPosition = currentPosition;
-
-            // Chỉ bắn event khi có dịch chuyển (tránh gọi event vô nghĩa)
-            if (delta.sqrMagnitude > 0.0001f)
+            // Chỉ bắn khi ngón tay thực sự di chuyển
+            if (delta.sqrMagnitude > 0.001f)
             {
                 OnDragDelta?.Invoke(delta);
             }
-        }
-        else
-        {
-            wasPressedLastFrame = false;
         }
     }
 }
